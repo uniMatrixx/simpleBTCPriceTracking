@@ -1,7 +1,7 @@
 # simpleBTCPriceTracking
-#Simple BTC price tracking with coindesk API
-#You can start with this example to develope complex apps for the other coins !
-#Firstly you will import modules
+//Simple BTC price tracking with coindesk API
+//You can start with this example to develope complex apps for the other coins !
+//Firstly you will import modules
 
 import requests
 import time
@@ -10,7 +10,7 @@ from email.mime.text import  MIMEText
 import smtplib
 import getpass
 
-## This function provides to send mail 
+
 def send_mail():  
     #messagetext = 'This is bitcoin price tracking app'
     msg = MIMEMultipart()
