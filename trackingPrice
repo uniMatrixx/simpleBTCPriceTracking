@@ -1,0 +1,58 @@
+##Before start coding we r gonna import a couple module
+## requests for API data
+## time , it means that every 5 min reworks again
+##email.mime smtplib : this is for sending a mail ## I will using hotmail
+##getpass : mask your pasword to when you enter
+
+
+import requests
+import time
+from email.mime.multipart import  MIMEMultipart
+from email.mime.text import  MIMEText
+import smtplib
+import getpass
+
+## This function for sending a mail
+
+def send_mail():
+    #messagetext = 'This is bitcoin price tracking app'
+    msg = MIMEMultipart()
+    msg['From'] = "helsing_75@hotmail.com"
+    msg['To'] = "cemalettin_14723@hotmail.com"
+    msg['Subject'] = " CHECK BITCOIN PRICE !!!"
+
+    message = "Dear " + "User" + "\nBitcoin prices are now " + str(
+        bitcoin_rate) + ". Better buy quick.\nRegards,\n"
+
+    msg.attach(MIMEText(message,'plain'))
+    ##if we wanna add file we can do later.
+
+    s = smtplib.SMTP("smtp.live.com",587)
+    s.ehlo()
+    s.starttls()
+    s.ehlo()
+    s.login('helsing_75@hotmail.com','betl713984265')
+    s.sendmail("helsing_75@hotmail.com","cemalettin_14723@hotmail.com",msg.as_string())
+    s.quit()
+
+    print("Email send Succesfully!")
+
+
+while True:
+    url ="https://api.coindesk.com/v1/bpi/currentprice.json"
+    response = requests.get(
+        url,
+        headers = {"Accept": "application/json"},
+    )
+    data = response.json()
+    bpi= data['bpi']
+    USD = bpi['USD']
+    bitcoin_rate = int(USD['rate_float'])
+    if bitcoin_rate< int(10360):
+        send_mail()
+        print("Will check again in 3 minutes. CTRL+C to quit")
+
+        time.sleep(180)
+    else:
+        time.sleep(300)
+        print('Price is ' + str(bitcoin_rate) + '. Will check again in 5 minutes. Ctrl+c to quit')
