@@ -1,7 +1,6 @@
-# simpleBTCPriceTracking
-//Simple BTC price tracking with coindesk API
-//You can start with this example to develope complex apps for the other coins !
-//Firstly you will import modules
+Simple BTC price tracking with coindesk API
+You can start with this example to develope complex apps for the other coins !
+Firstly you will import modules
 
 import requests
 import time
